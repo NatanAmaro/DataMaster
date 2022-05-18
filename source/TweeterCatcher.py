@@ -1,6 +1,6 @@
 import tweepy
 from kafka import KafkaProducer
-from source.constants import *
+from constants import *
 from json import dumps
 
 
@@ -10,9 +10,10 @@ def run():
 
     producer = KafkaProducer(bootstrap_servers=BOOTSTRAP_SERVERS, value_serializer=lambda K: dumps(K).encode('utf-8'))
     api = tweepy.API(auth)
-    tweets = tweepy.Cursor(api.search_tweets, q="#santander", tweet_mode='extended')
+    tweets = tweepy.Cursor(api.search_tweets, q="#santander", tweet_mode='extended').items()
 
     for tweet in tweets:
+        # producer.send('SantanderTweets', tweet)
         print(tweet)
 
 
