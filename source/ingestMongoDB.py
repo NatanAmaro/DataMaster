@@ -1,3 +1,4 @@
+#TODO Arquivo unutilizado estrategia alterada.
 import pymongo_spark
 import findspark
 from constants import *
@@ -20,7 +21,7 @@ def run():
 
     rdd = df.rdd.map(tuple)
 
-    rdd.saveToMongoDB(MONGO_CONN_STRING + '/admin.enade')
+    rdd.saveToMongoDB(MONGO_CONN_STRING + '/admin.cursos')
 
 
 if __name__ == '__main__':
