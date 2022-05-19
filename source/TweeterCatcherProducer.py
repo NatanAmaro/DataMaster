@@ -1,3 +1,4 @@
+#TODO Arquivo unutilizado estrategia alterada.
 import tweepy
 from kafka import KafkaProducer
 from constants import *
@@ -10,11 +11,10 @@ def run():
 
     producer = KafkaProducer(bootstrap_servers=BOOTSTRAP_SERVERS, value_serializer=lambda K: dumps(K).encode('utf-8'))
     api = tweepy.API(auth)
-    tweets = tweepy.Cursor(api.search_tweets, q="#santander", tweet_mode='extended').items()
+    tweets = tweepy.Cursor(api.search_tweets, q="#santander", tweet_mode='extended', lang="pt").items(100)
 
     for tweet in tweets:
-        # producer.send('SantanderTweets', tweet)
-        print(tweet)
+        producer.send('SantanderTweets', tweet)
 
 
 if __name__ == '__main__':
